@@ -1,11 +1,21 @@
 <template>
   <div>
     <div class="chart-header">
-      <h3>{{chartTitle}}</h3>
+      <h3>{{ chartTitle }}</h3>
       <button>acumulado</button>
     </div>
     <div class="chart-container">
-      <line-chart :curve="false" :data="{'sept.21': 40, 'oct.21': 180, 'nov.21': 90, 'dic.21': 70, 'ene.22': 195, 'feb.22': 60 }"></line-chart>
+      <line-chart
+        :curve="false"
+        :data="{
+          'sept.21': 40,
+          'oct.21': 180,
+          'nov.21': 90,
+          'dic.21': 70,
+          'ene.22': 195,
+          'feb.22': 60,
+        }"
+      ></line-chart>
     </div>
   </div>
 </template>
@@ -45,8 +55,8 @@ export default {
 <style scoped>
 .chart-header {
   align-items: center;
-  background-color:#EAEAEA;
-  border: 1px solid #E4E4E4;
+  background-color: #eaeaea;
+  border: 1px solid #e4e4e4;
   display: flex;
   flex-direction: row;
   height: 40px;
@@ -60,9 +70,9 @@ h3 {
 }
 
 button {
-  background-color:#FEEDA6;
+  background-color: #feeda6;
   border-radius: 5px;
-  border: 1px solid #F4DDAB;
+  border: 1px solid #f4ddab;
   font-size: 12px;
   margin: 16px 0;
   padding: 4px 32px;
