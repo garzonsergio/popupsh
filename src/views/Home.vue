@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <h1>dashboard lead</h1>
     <div class="indices-container">
       <sh-index indexDB="148" indexName="leads mensuales" />
       <sh-index indexDB="22" indexName="leads diarios" />
@@ -27,6 +28,10 @@ export default {
 };
 </script>
 <style scoped>
+h1 {
+  text-transform: capitalize;
+  text-align: start;
+}
 .home {
   width: 95vw;
   margin: 0 auto;
