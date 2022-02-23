@@ -14,9 +14,8 @@ export default {
         return "indexBlue";
       } else if (indexNumber > this.indexTopLimit) {
         return "indexGreen";
-      } else {
-        return "indexYellow";
       }
+      return "indexYellow";
     },
   },
   props: {
