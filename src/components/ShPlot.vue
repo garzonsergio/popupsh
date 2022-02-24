@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="chart-header">
-      <h3>{{ chartTitle }}</h3>
+      <h3>texto</h3>
       <button @click="switchData()">{{ this.buttonName }}</button>
     </div>
     <div class="chart-container">
@@ -10,7 +10,7 @@
   </div>
 </template>
 <script>
-// import api from "@/api.js";
+import api from "@/api.js";
 
 export default {
   name: "ShPlot",
@@ -38,30 +38,51 @@ export default {
       },
       buttonStatus: true,
       buttonName: "acumulado",
+      assets: {},
     };
+  },
+  created() {
+    api.getAssets().then((assets) => (this.assets = assets));
   },
 
   methods: {
-    getAccumulatedValues() {
-      var leadValues = Object.values(this.leads);
-      var leadKeys = Object.keys(this.leads);
-      var accumulatedLeads = {};
-      const accumulatedValues = new Array(leadValues.length).fill(0);
-      for (let i = 0; i < leadValues.length; i++) {
-        accumulatedValues[i] =
-          leadValues[i] +
-          (accumulatedValues[i - 1] ? accumulatedValues[i - 1] : 0);
+    getValues() {
+      var limit = 100;
+      const assetsVArray = [];
+      const assetKArray = [];
+      const valuesAssets = {};
+      for (let i = 0; i < limit; i++) {
+        assetsVArray[i] = this.assets[i].priceUsd;
+        assetKArray[i] = this.assets[i].date;
       }
-      leadKeys.forEach(
-        (key, i) => (accumulatedLeads[key] = accumulatedValues[i])
-      );
-      console.log(accumulatedLeads);
-      return accumulatedLeads;
+
+      assetKArray.forEach((key, i) => (valuesAssets[key] = assetsVArray[i]));
+
+      return valuesAssets;
+    },
+
+    getAccumulatedValues() {
+      var limit = 100;
+      const assetsVArray = [];
+      const assetKArray = [];
+      const valAsset = [];
+      var valuesAssets = {};
+      for (let i = 0; i < limit; i++) {
+        assetsVArray[i] = parseFloat(this.assets[i].priceUsd);
+        assetKArray[i] = this.assets[i].date;
+      }
+
+      for (let i = 0; i < limit; i++) {
+        valAsset[i] = assetsVArray[i] + (valAsset[i - 1] ? valAsset[i - 1] : 0);
+      }
+      assetKArray.forEach((key, i) => (valuesAssets[key] = valAsset[i]));
+      console.log(valuesAssets);
+      return valuesAssets;
     },
 
     switchChart() {
       if (this.buttonStatus === true) {
-        return this.leads;
+        return this.getValues();
       } else {
         return this.getAccumulatedValues();
       }
@@ -78,20 +99,6 @@ export default {
     },
   },
 };
-
-// data() {
-//   return {
-//     isLoading: false,
-//     assets: [],
-//   };
-// },
-// created() {
-//   this.isLoading = true;
-//   api
-//     .getAssets()
-//     .then((assets) => (this.assets = assets))
-//     .finally(() => (this.isLoading = false));
-// },
 </script>
 <style scoped>
 .chart-header {
