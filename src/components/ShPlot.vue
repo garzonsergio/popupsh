@@ -2,7 +2,7 @@
   <div>
     <div class="chart-header">
       <h3>{{ chartTitle }}</h3>
-      <button @click="switchData()">acumulado</button>
+      <button @click="switchData()">{{ this.buttonName }}</button>
     </div>
     <div class="chart-container">
       <line-chart :curve="false" :data="switchChart()"></line-chart>
@@ -37,6 +37,7 @@ export default {
         "feb.22": 60,
       },
       buttonStatus: true,
+      buttonName: "acumulado",
     };
   },
 
@@ -69,8 +70,10 @@ export default {
     switchData() {
       if (this.buttonStatus) {
         this.buttonStatus = false;
+        this.buttonName = "mes a mes";
       } else {
         this.buttonStatus = true;
+        this.buttonName = "acumulado";
       }
     },
   },
@@ -114,6 +117,7 @@ button {
   font-size: 12px;
   margin: 16px 0;
   padding: 4px 32px;
+  text-transform: capitalize;
 }
 button:hover {
   opacity: 85%;
