@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="chart-header">
-      <h3>texto</h3>
+      <h3>{{ chartTitle }}</h3>
       <button @click="switchData()">{{ this.buttonName }}</button>
     </div>
     <div class="chart-container">
