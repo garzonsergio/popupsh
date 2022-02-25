@@ -76,7 +76,7 @@ export default {
         valAsset[i] = assetsVArray[i] + (valAsset[i - 1] ? valAsset[i - 1] : 0);
       }
       assetKArray.forEach((key, i) => (valuesAssets[key] = valAsset[i]));
-      console.log(valuesAssets);
+
       return valuesAssets;
     },
 
