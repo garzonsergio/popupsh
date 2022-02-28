@@ -48,6 +48,7 @@ export default {
   methods: {
     getValues() {
       var limit = 30;
+
       const assetsVArray = [];
       const assetKArray = [];
       const valuesAssets = {};
@@ -62,27 +63,39 @@ export default {
 
         return valuesAssets;
       } catch (error) {
-        console.log(error);
+        console.log(
+          "TCL ~ file: ShPlot.vue ~ line 51 ~ getValues ~ limit",
+          limit
+        );
       }
     },
 
     getAccumulatedValues() {
-      var limit = 30;
-      const assetsVArray = [];
-      const assetKArray = [];
-      const valAsset = [];
-      var valuesAssets = {};
-      for (let i = 0; i < limit; i++) {
-        assetsVArray.push(parseFloat(this.assets[i].priceUsd));
-        assetKArray.push(this.assets[i].date);
-      }
+      try {
+        var limit = 30;
 
-      for (let i = 0; i < limit; i++) {
-        valAsset[i] = assetsVArray[i] + (valAsset[i - 1] ? valAsset[i - 1] : 0);
-      }
-      assetKArray.forEach((key, i) => (valuesAssets[key] = valAsset[i]));
+        const assetsVArray = [];
+        const assetKArray = [];
+        const valAsset = [];
+        var valuesAssets = {};
+        for (let i = 0; i < limit; i++) {
+          assetsVArray.push(parseFloat(this.assets[i].priceUsd));
+          assetKArray.push(this.assets[i].date);
+        }
 
-      return valuesAssets;
+        for (let i = 0; i < limit; i++) {
+          valAsset[i] =
+            assetsVArray[i] + (valAsset[i - 1] ? valAsset[i - 1] : 0);
+        }
+        assetKArray.forEach((key, i) => (valuesAssets[key] = valAsset[i]));
+
+        return valuesAssets;
+      } catch (error) {
+        console.log(
+          "TCL ~ file: ShPlot.vue ~ line 51 ~ getValues ~ limit",
+          limit
+        );
+      }
     },
 
     switchChart() {
