@@ -19,9 +19,7 @@ export default {
     },
   },
   props: {
-    indexDB: {
-      type: Number,
-    },
+    indexDB: null,
     indexName: {
       type: String,
       default: "index name",

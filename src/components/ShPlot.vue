@@ -47,29 +47,34 @@ export default {
 
   methods: {
     getValues() {
-      var limit = 100;
+      var limit = 30;
       const assetsVArray = [];
       const assetKArray = [];
       const valuesAssets = {};
-      for (let i = 0; i < limit; i++) {
-        assetsVArray[i] = this.assets[i].priceUsd;
-        assetKArray[i] = this.assets[i].date;
+      try {
+        for (let i = 0; i < limit; i++) {
+          assetsVArray.push(parseFloat(this.assets[i].priceUsd));
+        }
+        for (let j = 0; j < limit; j++) {
+          assetKArray.push(this.assets[j].date);
+        }
+        assetKArray.forEach((key, i) => (valuesAssets[key] = assetsVArray[i]));
+
+        return valuesAssets;
+      } catch (error) {
+        console.log(error);
       }
-
-      assetKArray.forEach((key, i) => (valuesAssets[key] = assetsVArray[i]));
-
-      return valuesAssets;
     },
 
     getAccumulatedValues() {
-      var limit = 100;
+      var limit = 30;
       const assetsVArray = [];
       const assetKArray = [];
       const valAsset = [];
       var valuesAssets = {};
       for (let i = 0; i < limit; i++) {
-        assetsVArray[i] = parseFloat(this.assets[i].priceUsd);
-        assetKArray[i] = this.assets[i].date;
+        assetsVArray.push(parseFloat(this.assets[i].priceUsd));
+        assetKArray.push(this.assets[i].date);
       }
 
       for (let i = 0; i < limit; i++) {

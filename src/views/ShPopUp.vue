@@ -16,14 +16,15 @@
 
 <script>
 // @ is an alias to /src
-import ShPlot from "@/components/ShPlot";
+
 import ShIndex from "@/components/ShIndex";
+import ShPlot from "@/components/ShPlot";
 
 export default {
   name: "ShPopUp",
   components: {
-    ShPlot,
     ShIndex,
+    ShPlot,
   },
 };
 </script>
